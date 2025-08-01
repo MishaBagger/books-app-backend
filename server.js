@@ -1,26 +1,16 @@
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
-const sequelize = require('./controllers/db-connect.js')
+const sequelize = require('./controllers/database.js')
 const router = require('./router/router.js')
 const helmet = require('helmet')
 const { globalLimiter, apiLimiter } = require('./utils/rateLimiters.js')
 
-const errorMiddleware = require('./middlewares/error-middleware.js')
+const errorMiddleware = require('./middlewares/errorMiddleware.js')
 const PORT = process.env.PORT || 5000
 
-const User = require('./models/user-model.js') // Файл модели User
-const Token = require('./models/token-model.js') // Файл модели Token
-const Order = require('./models/order-model.js') // Файл модели Order
-const Service = require('./models/service-model.js') // Файл модели Service
-const Article = require('./models/article-model.js') // Файл модели Article
-const Vacancy = require('./models/vacancy-model.js') // Файл модели Vacancy
-const Course = require('./models/course-model.js') // Файл модели Course
-const Gallery = require('./models/gallery-model.js') // Файл модели Gallery
-const Request = require('./models/request-model.js') // Файл модели Request
-const Metric = require('./models/metric-model.js') // Файл модели Metric
-const Banner = require('./models/banner-model.js') // Файл модели Banner
-const Video = require('./models/video-model.js') // Файл модели Video
+const User = require('./models/userModel.js') // Файл модели User
+const Token = require('./models/tokenModel.js') // Файл модели Token
 
 const app = express()
 
@@ -46,47 +36,6 @@ const start = async () => {
                 model: Token,
                 message:
                     'Таблица токенов пользователей успешно синхронизирована',
-            },
-            {
-                model: Order,
-                message:
-                    'Таблица заказов пользователей успешно синхронизирована',
-            },
-            {
-                model: Service,
-                message: 'Таблица слайдера услуг успешно синхронизирована',
-            },
-            {
-                model: Article,
-                message: 'Таблица статей успешно синхронизирована',
-            },
-            {
-                model: Vacancy,
-                message: 'Таблица вакансий успешно синхронизирована',
-            },
-            {
-                model: Course,
-                message: 'Таблица курсов успешно синхронизирована',
-            },
-            {
-                model: Gallery,
-                message: 'Таблица галереи успешно синхронизирована',
-            },
-            {
-                model: Request,
-                message: 'Таблица заявок успешно синхронизирована',
-            },
-            {
-                model: Metric,
-                message: 'Таблица метрик успешно синхронизирована',
-            },
-            {
-                model: Banner,
-                message: 'Таблица баннеров успешно синхронизирована',
-            },
-            {
-                model: Video,
-                message: 'Таблица видео успешно синхронизирована',
             },
         ]
 
