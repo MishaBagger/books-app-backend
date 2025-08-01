@@ -1,17 +1,17 @@
 const UserService = require('../../services/user/userService.js')
-const ApiError = require('../../exceptions/api-error.js')
+const ApiError = require('../../exceptions/apiError.js')
 const recaptchaVerify = require('../../utils/recaptchaVerify.js')
 
 class UserController {
-    async getUserOrders(req, res, next) {
+    async getBooks(req, res, next) {
         try {
-            const orders = await UserService.getUserOrders(req.user.id)
+            const books = await UserService.getBooks()
 
-            if (!orders) {
-                throw ApiError.NotFound('Заявки пользователя не найдены!')
+            if (!books) {
+                throw ApiError.NotFound('Ошибка при получении книги из Базы Данных!')
             }
 
-            return res.status(200).json(orders)
+            return res.status(200).json(books)
         } catch (e) {
             next(e)
         }

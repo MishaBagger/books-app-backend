@@ -1,16 +1,15 @@
-const OrderModel = require('../../models/order-model.js')
+const BookModel = require('../../models/bookModel.js')
 
 class UserService {
 
-    async getUserOrders(userId) {
+    async getBooks() {
         try {
-            const orders = await OrderModel.findAll({
-                where: { userId },
+            const books = await BookModel.findAll({
                 order: [
-                    ['createdAt', 'DESC'],
+                    ['date', 'DESC'],
                 ],
             })
-            return orders
+            return books
         } catch (error) {
             throw error
         }

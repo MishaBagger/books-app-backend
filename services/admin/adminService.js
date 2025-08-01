@@ -1,5 +1,5 @@
-const UserModel = require('../../models/user-model.js')
-const MetricModel = require('../../models/metric-model.js')
+const UserModel = require('../../models/userModel.js')
+const MetricModel = require('../../models/metricModel.js')
 
 class AdminService {
     async getMetrics() {

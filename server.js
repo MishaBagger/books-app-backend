@@ -9,8 +9,9 @@ const { globalLimiter, apiLimiter } = require('./utils/rateLimiters.js')
 const errorMiddleware = require('./middlewares/errorMiddleware.js')
 const PORT = process.env.PORT || 5000
 
-const User = require('./models/userModel.js') // Файл модели User
-const Token = require('./models/tokenModel.js') // Файл модели Token
+const User = require('./models/userModel.js')
+const Token = require('./models/tokenModel.js')
+const Book = require('./models/bookModel.js')
 
 const app = express()
 
@@ -37,10 +38,15 @@ const start = async () => {
                 message:
                     'Таблица токенов пользователей успешно синхронизирована',
             },
+                        {
+                model: Book,
+                message:
+                    'Таблица книг успешно синхронизирована',
+            },
         ]
 
         for (const table of tables) {
-            const syncResult = await table.model.sync() // Создание таблицы, если она не существует
+            const syncResult = await table.model.sync()
             if (syncResult) {
                 console.log(table.message)
             }
@@ -124,19 +130,7 @@ app.use(express.static('public'))
 
 // Обработка HTML
 app.get('*', (req, res) => {
-    res.sendFile(
-        '',
-        {
-            maxAge: '1d',
-            dotfiles: 'deny',
-        },
-        (err) => {
-            if (err) {
-                console.error(`Ошибка отправки файла: ${err}`)
-                res.status(404).send('Файл не найден')
-            }
-        }
-    )
+    res.json('Backend is working!')
 })
 
 start()
