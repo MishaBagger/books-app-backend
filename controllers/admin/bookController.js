@@ -3,7 +3,7 @@ const slugGenerator = require('../../utils/slugGenerator.js')
 const ApiError = require('../../exceptions/apiError.js')
 
 class BooksController {
-    async getArticle(req, res, next) {
+    async getBook(req, res, next) {
         try {
             const articles = await BookService.getArticle()
 
@@ -17,7 +17,7 @@ class BooksController {
         }
     }
 
-    async addArticle(req, res, next) {
+    async addBook(req, res, next) {
         try {
             const { articleTitle, articleDescription, articleText } = req.body
 
@@ -54,7 +54,7 @@ class BooksController {
         }
     }
 
-    async updateArticle(req, res, next) {
+    async updateBook(req, res, next) {
         try {
             const { id } = req.params
             const { title, description, text } = req.body
@@ -93,7 +93,7 @@ class BooksController {
         }
     }
 
-    async deleteArticle(req, res, next) {
+    async deleteBook(req, res, next) {
         try {
             const { id } = req.params
 

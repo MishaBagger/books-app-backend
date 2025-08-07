@@ -18,9 +18,9 @@ const booksMulterMiddleware = require('../middlewares/booksMulterMiddleware.js')
 
 
 // Книги
-router.get('/article', adminMiddleware, BookController.getArticle)
-router.post('/article', adminMiddleware, booksMulterMiddleware.single('booksImage'), BookController.addArticle)
-router.patch('/article/:id', adminMiddleware, BookController.updateArticle)
-router.delete('/article/:id', adminMiddleware, BookController.deleteArticle)
+router.get('/book', adminMiddleware, BookController.getBook)
+router.post('/book', adminMiddleware, booksMulterMiddleware.single('booksImage'), BookController.addBook)
+router.patch('/book/:id', adminMiddleware, BookController.updateBook)
+router.delete('/book/:id', adminMiddleware, BookController.deleteBook)
 
 module.exports = router

@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const sequelize = require('./controllers/database.js')
 const router = require('./router/router.js')
 const helmet = require('helmet')
+const compression = require('compression')
 const { globalLimiter, apiLimiter } = require('./utils/rateLimiters.js')
 
 const errorMiddleware = require('./middlewares/errorMiddleware.js')
@@ -20,28 +21,27 @@ const start = async () => {
         sequelize
             .authenticate()
             .then(() => {
-                console.log('Подключение к базе данных MySQL успешно')
+                console.log('Подключение к базе данных \x1b[33m MySQL\x1b[0m \x1b[32m успешно \x1b[0m')
             })
             .catch((err) => {
                 console.log(
-                    `Подключение к базе данных MySQL провалилось: ${err}`
+                    `Подключение к базе данных \x1b[33m MySQL\x1b[0m \x1b[31m провалилось: ${err} \x1b[0m`
                 )
             })
 
         const tables = [
             {
                 model: User,
-                message: 'Таблица пользователей успешно синхронизирована',
+                message: 'Таблица \x1b[33m пользователей\x1b[0m успешно \x1b[32m синхронизирована \x1b[0m',
             },
             {
                 model: Token,
                 message:
-                    'Таблица токенов пользователей успешно синхронизирована',
+                    'Таблица \x1b[33m токенов пользователей\x1b[0m успешно \x1b[32m синхронизирована \x1b[0m',
             },
-                        {
+            {
                 model: Book,
-                message:
-                    'Таблица книг успешно синхронизирована',
+                message: 'Таблица \x1b[33m книг\x1b[0m успешно \x1b[32m синхронизирована \x1b[0m',
             },
         ]
 
@@ -52,7 +52,7 @@ const start = async () => {
             }
         }
 
-        app.listen(PORT, () => console.log(`Сервер запущен на порту ${PORT}`))
+        app.listen(PORT, () => console.log(`Бэкенд \x1b[33m сервер\x1b[0m запущен на порту \x1b[32m ${PORT} \x1b[0m`))
     } catch (e) {
         console.log(e)
     }
@@ -92,6 +92,10 @@ app.use(
                     'https://*.yandex.ru',
                     'https://*.google.com',
                 ],
+                frameAncestors: [
+                    "'self'",
+                    'https://*.google.com',
+                ],
                 imgSrc: ["'self'", 'https://vk.com', 'data:'],
                 connectSrc: ["'self'", 'https://*.google.com'],
             },
@@ -111,6 +115,13 @@ app.use(
         origin: process.env.FRONTEND_URL,
     })
 )
+
+// Компрессия
+app.use(compression({
+  level: 6,
+  threshold: '1kb',
+  filter: (req) => !req.headers['x-no-compression']
+}));
 
 // Парсинг Cookies и JSON
 app.use(cookieParser())

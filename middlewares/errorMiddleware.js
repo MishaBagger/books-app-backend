@@ -21,9 +21,12 @@ module.exports = function (err, req, res, next) {
             .status(err.status)
             .json({ message: err.message, errors: err.errors })
     }
+    
     logger.error({
         timestamp: new Date().toLocaleString('ru-RU'),
         error: err,
+        status: err?.status,
+        message: err?.message,
         request: {
             url: req.originalUrl,
             path: req.path,
