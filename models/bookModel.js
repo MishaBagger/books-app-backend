@@ -9,6 +9,10 @@ const Book = sequelize.define(
             primaryKey: true,
             autoIncrement: true,
         },
+        slug: {
+            type: DataTypes.CHAR,
+            allowNull: false,
+        },
         title: {
             type: DataTypes.CHAR,
             allowNull: false,
@@ -30,9 +34,9 @@ const Book = sequelize.define(
             allowNull: false,
         },
         platform: {
-            type: DataTypes.CHAR,
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 'Литрес',
+            defaultValue: 'ЛитРес',
         },
     },
     {

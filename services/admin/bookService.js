@@ -14,13 +14,14 @@ class BookService {
             })
             return books
         } catch (error) {
-            throw error // Пробрасываем для логирования
+            throw error
         }
     }
 
-    async addBook(title, description, date, image, link, platform) {
+    async addBook(slug, title, description, date, image, link, platform) {
         try {
             const book = await BookModel.create({
+                slug,
                 title,
                 description,
                 date,
@@ -33,7 +34,7 @@ class BookService {
                 success: true,
             }
         } catch (error) {
-            throw error // Пробрасываем для логирования
+            throw error
         }
     }
 
@@ -58,7 +59,7 @@ class BookService {
                 success: true,
             }
         } catch (error) {
-            throw error // Пробрасываем для логирования
+            throw error
         }
     }
 
@@ -105,7 +106,7 @@ class BookService {
             }
             return false // Если запись не найдена, возвращаем false
         } catch (error) {
-            throw error // Пробрасываем для логирования
+            throw error
         }
     }
 }

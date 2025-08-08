@@ -19,9 +19,7 @@ class BooksController {
 
     async addBook(req, res, next) {
         try {
-            const { articleTitle, articleDescription, articleText } = req.body
-
-            const articleSlug = slugGenerator(articleTitle)
+            const { title, description, date, link, platform } = req.body
 
             if (!req.file) {
                 throw ApiError.BadRequest(
@@ -29,25 +27,33 @@ class BooksController {
                 )
             }
 
+            const slug = slugGenerator(title)
+
+            const [day, month, year] = date.split('.');
+            const isoDate = new Date(`${year}-${month}-${day}`).toISOString();
+
             const image = req.file.filename
-            const articleData = await BookService.addArticle(
-                articleSlug,
-                articleTitle,
-                articleDescription,
-                articleText,
-                image
+
+            const bookData = await BookService.addBook(
+                slug,
+                title,
+                description,
+                isoDate,
+                image,
+                link,
+                platform
             )
 
-            if (!articleData || !articleData.success) {
+            if (!bookData || !bookData.success) {
                 throw ApiError.InternalServerError(
-                    'Ошибка при добавлении статьи!'
+                    'Ошибка при добавлении книги!'
                 )
             }
 
             return res.status(201).json({
-                ...articleData,
-                title: 'Статья успешно добавлена!',
-                description: `Статья "${articleData.dataValues.title}" успешно добавлена.`,
+                ...bookData,
+                title: 'Книга успешно добавлена!',
+                description: `Книга "${bookData.dataValues.title}" успешно добавлена.`,
             })
         } catch (e) {
             next(e)

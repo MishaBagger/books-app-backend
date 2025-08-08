@@ -6,7 +6,7 @@ const adminMiddleware = require('../middlewares/adminMiddleware.js')
 
 const BookController = require('../controllers/admin/bookController.js')
 
-const booksMulterMiddleware = require('../middlewares/booksMulterMiddleware.js')
+const bookMulterMiddleware = require('../middlewares/bookMulterMiddleware.js')
 
 // Общая логика администратора
 
@@ -19,7 +19,7 @@ const booksMulterMiddleware = require('../middlewares/booksMulterMiddleware.js')
 
 // Книги
 router.get('/book', adminMiddleware, BookController.getBook)
-router.post('/book', adminMiddleware, booksMulterMiddleware.single('booksImage'), BookController.addBook)
+router.post('/book', adminMiddleware, bookMulterMiddleware.single('image'), BookController.addBook)
 router.patch('/book/:id', adminMiddleware, BookController.updateBook)
 router.delete('/book/:id', adminMiddleware, BookController.deleteBook)
 
