@@ -1,7 +1,7 @@
 const Router = require('express').Router
 const router = Router()
 const { body } = require('express-validator')
-const AuthController = require('../controllers/auth/authController.js')
+const AuthController = require('../controllers/auth/AuthController.js')
 const authMiddleware = require('../middlewares/authMiddleware.js')
 
 // Регистрация и авторизация

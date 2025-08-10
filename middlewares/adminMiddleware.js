@@ -1,4 +1,4 @@
-const ApiError = require('../exceptions/apiError.js')
+const ApiError = require('../exceptions/ApiError.js')
 const tokenService = require('../services/auth/tokenService.js')
 const AdminService = require('../services/admin/adminService.js')
 

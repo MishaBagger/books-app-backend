@@ -1,7 +1,8 @@
 const UserModel = require('../models/userModel.js')
 const { UserDto, UserDataDto } = require('../dtos/userDto.js')
-const ApiError = require('../exceptions/apiError.js')
+const ApiError = require('../exceptions/ApiError.js')
 const tokenService = require('../services/auth/tokenService.js')
+
 module.exports = async function (req, res, next) {
     try {
         const authorizationHeader = req.headers.authorization

@@ -1,12 +1,12 @@
 const AdminService = require('../../services/admin/adminService.js')
-const ApiError = require('../../exceptions/apiError.js')
+const ApiError = require('../../exceptions/ApiError.js')
 
 class AdminController {
     async getMetrics(req, res, next) {
         try {
             const metrics = await AdminService.getMetrics()
 
-            if(!metrics) {
+            if (!metrics) {
                 throw ApiError.NotFound('Метрики не найдены!')
             }
 
@@ -16,6 +16,19 @@ class AdminController {
         }
     }
 
+    async getUsers(req, res, next) {
+        try {
+            const users = await AdminService.getUsers()
+
+            if (!users) {
+                throw ApiError.InternalServerError(
+                    'Ошибка при получении пользователей!'
+                )
+            }
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 
 module.exports = new AdminController()

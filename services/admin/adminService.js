@@ -33,7 +33,6 @@ class AdminService {
         }
     }
 
-
     async getAdmin(id) {
         try {
             const admin = await UserModel.findOne({

@@ -1,11 +1,10 @@
 const Router = require('express').Router
 const router = Router()
 
-const AdminController = require('../controllers/admin/adminController.js')
+const AdminController = require('../controllers/admin/AdminController.js')
 const adminMiddleware = require('../middlewares/adminMiddleware.js')
 
-const BookController = require('../controllers/admin/bookController.js')
-
+const BookAdminController = require('../controllers/book/BookAdminController.js')
 const bookMulterMiddleware = require('../middlewares/bookMulterMiddleware.js')
 
 // Общая логика администратора
@@ -18,9 +17,9 @@ const bookMulterMiddleware = require('../middlewares/bookMulterMiddleware.js')
 
 
 // Книги
-router.get('/book', adminMiddleware, BookController.getBook)
-router.post('/book', adminMiddleware, bookMulterMiddleware.single('image'), BookController.addBook)
-router.patch('/book/:id', adminMiddleware, BookController.updateBook)
-router.delete('/book/:id', adminMiddleware, BookController.deleteBook)
+// router.get('/book', adminMiddleware, BookController.getBooks)
+router.post('/book', adminMiddleware, bookMulterMiddleware.single('image'), BookAdminController.addBook)
+router.patch('/book/:id', adminMiddleware, bookMulterMiddleware.single('image'), BookAdminController.updateBook)
+router.delete('/book/:id', adminMiddleware, BookAdminController.deleteBook)
 
 module.exports = router

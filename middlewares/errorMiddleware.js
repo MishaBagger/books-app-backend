@@ -1,5 +1,6 @@
-const ApiError = require('../exceptions/apiError.js')
+const ApiError = require('../exceptions/ApiError.js')
 const logger = require('../logging/logger.js')
+
 module.exports = function (err, req, res, next) {
     if (err instanceof ApiError) {
         logger.error({

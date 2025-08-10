@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator')
-const ApiError = require('../../exceptions/apiError.js')
+const ApiError = require('../../exceptions/ApiError.js')
 const AuthService = require('../../services/auth/authService.js')
 const recaptchaVerify = require('../../utils/recaptchaVerify.js')
 
