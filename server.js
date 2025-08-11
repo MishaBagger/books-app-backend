@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 5000
 const User = require('./models/userModel.js')
 const Token = require('./models/tokenModel.js')
 const Book = require('./models/bookModel.js')
+const Metric = require('./models/metricModel.js')
 
 const app = express()
 
@@ -43,6 +44,9 @@ const start = async () => {
                 model: Book,
                 message: 'Таблица \x1b[33m книг\x1b[0m успешно \x1b[32m синхронизирована \x1b[0m',
             },
+            { model: Metric,
+                message: 'Таблица \x1b[33m метрик\x1b[0m успешно \x1b[32m синхронизирована \x1b[0m'
+            }
         ]
 
         for (const table of tables) {

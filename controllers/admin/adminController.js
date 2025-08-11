@@ -7,7 +7,7 @@ class AdminController {
             const metrics = await AdminService.getMetrics()
 
             if (!metrics) {
-                throw ApiError.NotFound('Метрики не найдены!')
+                throw ApiError.NotFound('Ошибка при получении метрик!')
             }
 
             return res.status(200).json(metrics)

@@ -6,18 +6,6 @@ class AdminService {
         try {
             const metrics = await MetricModel.findOne()
 
-            if (!metrics) {
-                await MetricModel.create({
-                    visits: 0,
-                    vacancies: 0,
-                    articles: 0,
-                    domainRU: 0,
-                    domainENG: 0,
-                    clickAsking: 0,
-                    clickTraining: 0,
-                })
-            }
-
             return metrics
         } catch (error) {
             throw error

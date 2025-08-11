@@ -9,33 +9,20 @@ const Metric = sequelize.define(
             primaryKey: true,
             autoIncrement: true,
         },
-        domainRU: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        domainENG: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
         visits: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            defaultValue: 0,
         },
-        vacancies: {
+        redirects: {
             type: DataTypes.INTEGER,
             allowNull: true,
+            defaultValue: 0,
         },
-        articles: {
+        users: {
             type: DataTypes.INTEGER,
             allowNull: true,
-        },
-        clickAsking: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
-        },
-        clickTraining: {
-            type: DataTypes.INTEGER,
-            allowNull: true,
+            defaultValue: 0,
         },
     },
     {
@@ -43,5 +30,17 @@ const Metric = sequelize.define(
         timestamps: false,
     }
 )
+
+Metric.updateUserCount = async function() {
+  const userCount = await sequelize.models.User.count()
+  const metric = await this.findOne() || await this.create({})
+  return await metric.update({ users: userCount })
+}
+
+Metric.updateUserCount()
+
+setInterval(() => {
+    Metric.updateUserCount()
+}, 60 * 60 * 1000 )
 
 module.exports = Metric

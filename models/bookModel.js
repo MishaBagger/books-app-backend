@@ -42,6 +42,13 @@ const Book = sequelize.define(
     {
         tableName: 'books',
         timestamps: false,
+        hooks: {
+            beforeCreate: (book) => {
+                if (!book.platform) {
+                    book.platform = 'ЛитРес'
+                }
+            },
+        },
     }
 )
 
