@@ -14,6 +14,7 @@ const User = require('./models/userModel.js')
 const Token = require('./models/tokenModel.js')
 const Book = require('./models/bookModel.js')
 const Metric = require('./models/metricModel.js')
+const Redirect = require('./models/redirectModel.js')
 
 const app = express()
 
@@ -46,6 +47,9 @@ const start = async () => {
             },
             { model: Metric,
                 message: 'Таблица \x1b[33m метрик\x1b[0m успешно \x1b[32m синхронизирована \x1b[0m'
+            },
+             { model: Redirect,
+                message: 'Таблица \x1b[33m редиректов\x1b[0m успешно \x1b[32m синхронизирована \x1b[0m'
             }
         ]
 

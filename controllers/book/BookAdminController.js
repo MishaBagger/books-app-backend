@@ -37,7 +37,7 @@ class bookAdminController {
 
             return res.status(201).json({
                 ...bookData,
-                title: 'Книга успешно добавлена!',
+                title: 'Книга добавлена!',
                 description: `Книга "${bookData.dataValues.title}" успешно добавлена.`,
             })
         } catch (e) {
@@ -92,7 +92,7 @@ class bookAdminController {
 
             return res.status(201).json({
                 ...bookData,
-                title: 'Книга успешно изменена!',
+                title: 'Книга изменена!',
                 description: `Книга "${bookData.dataValues.title}" успешно изменена.`,
             })
         } catch (e) {
@@ -118,7 +118,7 @@ class bookAdminController {
 
             return res.status(200).json({
                 ...bookData,
-                title: 'Книга успешно удалена!',
+                title: 'Книга удалена!',
                 description: bookData.message,
             })
         } catch (e) {

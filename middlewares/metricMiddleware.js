@@ -1,4 +1,5 @@
 const MetricModel = require('../models/metricModel.js')
+const RedirectModel = require('../models/redirectModel.js')
 
 module.exports = async function (req, res, next) {
     const COOKIE_PREFIX = 'kalinina_books_'
@@ -6,18 +7,30 @@ module.exports = async function (req, res, next) {
     try {
         if (req.method !== 'GET') return next()
 
-        // if (req.path.startsWith('/click')) {
-        //     const { button } = req.params
-        //     const buttonMetric = METRIC_CONFIG.button[button]
+        if (req.path.startsWith('/redirect')) {
+            const { bookId } = req.params
 
-        //     if (buttonMetric) {
-        //         await MetricModel.increment(buttonMetric, {
-        //             where: {
-        //                 id: 1,
-        //             },
-        //         })
-        //     }
-        // }
+            await MetricModel.increment('value', {
+                where: {
+                    name: 'redirects',
+                    period: 'monthly',
+                },
+                by: 1,
+            })
+
+            const [redirect, created] = await RedirectModel.findOrCreate({
+                where: {
+                    bookId,
+                },
+                defaults: {
+                    value: 1,
+                },
+            })
+
+            if (!created) {
+                await redirect.increment('value', { by: 1 });
+            }
+        }
 
         // Кука для домена (общая для всех страниц)
         if (!req.cookies[`${COOKIE_PREFIX}host`]) {
@@ -37,7 +50,6 @@ module.exports = async function (req, res, next) {
 
         next()
     } catch (e) {
-        console.error(`Ошибка счетчика метрик: ${e}`)
-        next()
+        next({message: 'Ошибка счётчика метрик'})
     }
 }

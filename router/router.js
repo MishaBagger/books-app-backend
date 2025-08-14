@@ -11,7 +11,7 @@ const BookController = require('../controllers/book/BookController.js')
 
 // Логика системы метрик
 router.get('/', metricMiddleware)
-router.get('/click/:button', metricMiddleware)
+router.get('/redirect/:bookId', metricMiddleware)
 
 // Логика обычного неавторизованного пользователя
 router.get('/books', BookController.getBooks)
