@@ -16,6 +16,20 @@ class AdminController {
         }
     }
 
+    async getBooks(req, res, next) {
+        try {
+            const books = await AdminService.getBooks()
+
+            if (!books) {
+                throw ApiError.NotFound('Ошибка при получении книг!')
+            }
+
+            return res.status(200).json(books)
+        } catch (e) {
+            next(e)
+        }
+    }
+
     async getUsers(req, res, next) {
         try {
             const users = await AdminService.getUsers()

@@ -2,7 +2,7 @@ const BookModel = require('../../models/bookModel.js')
 const deleteImageFile = require('../../utils/deleteImageFile.js')
 
 class bookAdminService {
-    async addBook(slug, title, description, date, image, link, platform) {
+    async addBook(slug, title, description, date, image, link) {
         try {
             const book = await BookModel.create({
                 slug,
@@ -11,7 +11,6 @@ class bookAdminService {
                 date,
                 image,
                 link,
-                platform,
             })
             return {
                 ...book,
@@ -30,7 +29,6 @@ class bookAdminService {
         date,
         image,
         link,
-        platform
     ) {
         try {
             const book = await BookModel.findByPk(id)
@@ -47,7 +45,6 @@ class bookAdminService {
             if (description) updates.description = description
             if (date) updates.date = date
             if (link) updates.link = link
-            if (platform) updates.platform = platform
 
             // Обновляем только если есть изменения
             if (Object.keys(updates).length > 0) {

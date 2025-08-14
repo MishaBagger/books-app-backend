@@ -6,7 +6,7 @@ const dateGenerator = require('../../utils/dateGenerator.js')
 class bookAdminController {
     async addBook(req, res, next) {
         try {
-            const { title, description, date, link, platform } = req.body
+            const { title, description, date, link } = req.body
 
             if (!req.file) {
                 throw ApiError.BadRequest(
@@ -26,7 +26,6 @@ class bookAdminController {
                 isoDate,
                 image,
                 link,
-                platform
             )
 
             if (!bookData || !bookData.success) {
@@ -53,11 +52,11 @@ class bookAdminController {
                 throw ApiError.BadRequest('Не выбрана книга для изменения!')
             }
 
-            const { title, description, date, link, platform } = req.body
+            const { title, description, date, link } = req.body
 
             const image = req?.file?.filename
 
-            if (!title && !description && !date && !link && !platform && !image) {
+            if (!title && !description && !date && !link && !image) {
                 throw ApiError.BadRequest('Поля для изменений отсутствуют!')
             }
 
@@ -81,7 +80,6 @@ class bookAdminController {
                 isoDate,
                 image,
                 link,
-                platform
             )
 
             if (!bookData || !bookData.success) {

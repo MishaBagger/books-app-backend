@@ -1,23 +1,32 @@
 const UserModel = require('../../models/userModel.js')
 const MetricModel = require('../../models/metricModel.js')
-const Redirect = require('../../models/redirectModel.js')
-const Book = require('../../models/bookModel.js')
+const RedirectModel = require('../../models/redirectModel.js')
+const BookModel = require('../../models/bookModel.js')
 
 class AdminService {
     async getMetrics() {
         try {
             const metrics = await MetricModel.findAll()
 
-            const redirects = await Redirect.findAll({
+            const redirects = await RedirectModel.findAll({
                 include: [
                     {
-                        model: Book,
+                        model: BookModel,
                         attributes: ['title'],
                         required: true,
                     },
                 ],
             })
-            return {metrics, redirects}
+            return { metrics, redirects }
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getBooks() {
+        try {
+            const books = await BookModel.findAll({ order: ['id', 'title'] })
+            return books
         } catch (error) {
             throw error
         }

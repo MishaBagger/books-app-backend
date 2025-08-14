@@ -9,6 +9,7 @@ const bookMulterMiddleware = require('../middlewares/bookMulterMiddleware.js')
 
 // Общая логика администратора
 router.get('/metrics', adminMiddleware, AdminController.getMetrics)
+router.get('/books', adminMiddleware, AdminController.getBooks)
 
 // Заявки
 // router.get('/data/requests', adminMiddleware, RequestController.getAllRequests)
@@ -18,7 +19,6 @@ router.get('/metrics', adminMiddleware, AdminController.getMetrics)
 
 
 // Книги
-// router.get('/book', adminMiddleware, BookController.getBooks)
 router.post('/book', adminMiddleware, bookMulterMiddleware.single('image'), BookAdminController.addBook)
 router.patch('/book/:id', adminMiddleware, bookMulterMiddleware.single('image'), BookAdminController.updateBook)
 router.delete('/book/:id', adminMiddleware, BookAdminController.deleteBook)
