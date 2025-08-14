@@ -1,15 +1,22 @@
 const BookModel = require('../../models/bookModel.js')
 
 class BookService {
-    async getBooks() {
+    async getBooks(page = 1, limit = 8) {
         try {
-            const books = await BookModel.findAll()
-            return books
+            const offset = (page - 1) * limit
+            const { count, rows: books } = await BookModel.findAndCountAll({
+                offset,
+                limit,
+            })
+
+            return {
+                books,
+                totalPages: Math.ceil(count / limit),
+                currentPage: page,
+            }
         } catch (error) {
             throw error
         }
     }
-
-    
 }
 module.exports = new BookService()
