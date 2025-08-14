@@ -149,7 +149,7 @@ app.use(express.static('public'))
 
 // Обработка HTML
 app.get('*', (req, res) => {
-    res.json('Backend is working!')
+    res.json('ok')
 })
 
 start()
