@@ -8,6 +8,7 @@ const BookAdminController = require('../controllers/book/BookAdminController.js'
 const bookMulterMiddleware = require('../middlewares/bookMulterMiddleware.js')
 
 // Общая логика администратора
+router.get('/metrics', adminMiddleware, AdminController.getMetrics)
 
 // Заявки
 // router.get('/data/requests', adminMiddleware, RequestController.getAllRequests)

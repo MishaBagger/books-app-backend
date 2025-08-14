@@ -4,8 +4,7 @@ const MetricModel = require('../../models/metricModel.js')
 class AdminService {
     async getMetrics() {
         try {
-            const metrics = await MetricModel.findOne()
-
+            const metrics = await MetricModel.findAll()
             return metrics
         } catch (error) {
             throw error

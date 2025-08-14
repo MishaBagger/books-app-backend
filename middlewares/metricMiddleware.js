@@ -1,7 +1,6 @@
 const MetricModel = require('../models/metricModel.js')
 
 module.exports = async function (req, res, next) {
-
     const COOKIE_PREFIX = 'kalinina_books_'
 
     try {
@@ -22,10 +21,12 @@ module.exports = async function (req, res, next) {
 
         // Кука для домена (общая для всех страниц)
         if (!req.cookies[`${COOKIE_PREFIX}host`]) {
-            await MetricModel.increment('visits', {
+            await MetricModel.increment('value', {
                 where: {
-                    id: 1,
+                    name: 'visits',
+                    period: 'monthly',
                 },
+                by: 1,
             })
             res.cookie(`${COOKIE_PREFIX}host`, 'visits', {
                 maxAge: 60 * 60 * 1000,
