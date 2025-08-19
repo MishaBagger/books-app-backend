@@ -33,22 +33,10 @@ const Book = sequelize.define(
             type: DataTypes.CHAR,
             allowNull: false,
         },
-        platform: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            defaultValue: 'ЛитРес',
-        },
     },
     {
         tableName: 'books',
         timestamps: false,
-        hooks: {
-            beforeCreate: (book) => {
-                if (!book.platform) {
-                    book.platform = 'ЛитРес'
-                }
-            },
-        },
     }
 )
 

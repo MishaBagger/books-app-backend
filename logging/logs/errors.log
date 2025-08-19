@@ -1,0 +1,1 @@
+{"errors":[],"level":"error","message":"Пользователь не авторизован","request":{"ip":"::1","method":"GET","path":"/api/auth/access","url":"/api/auth/access","userAgent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 YaBrowser/25.6.0.0 Safari/537.36"},"status":401,"timestamp":"15.08.2025, 23:38:40"}

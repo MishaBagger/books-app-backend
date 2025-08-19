@@ -17,15 +17,15 @@ class AuthController {
 
             const { login, password, username, email, phone, recaptcha } = req.body
 
-            // if (!recaptcha) {
-            //     throw ApiError.BadCaptchaToken();
-            // }
+            if (!recaptcha) {
+                throw ApiError.BadCaptchaToken();
+            }
 
-            // const captchaVerify = await recaptchaVerify(recaptcha)
+            const captchaVerify = await recaptchaVerify(recaptcha)
 
-            // if (!captchaVerify) {
-            //     throw ApiError.BadVerifiedCaptchaToken()
-            // }
+            if (!captchaVerify) {
+                throw ApiError.BadVerifiedCaptchaToken()
+            }
 
             const userData = await AuthService.registration(
                 login,
@@ -50,15 +50,15 @@ class AuthController {
         try {
             const { login, password, recaptcha } = req.body
 
-            // if (!recaptcha) {
-            //     throw ApiError.BadCaptchaToken();
-            // }
+            if (!recaptcha) {
+                throw ApiError.BadCaptchaToken();
+            }
 
-            // const captchaVerify = await recaptchaVerify(recaptcha)
+            const captchaVerify = await recaptchaVerify(recaptcha)
 
-            // if (!captchaVerify) {
-            //     throw ApiError.BadVerifiedCaptchaToken()
-            // }
+            if (!captchaVerify) {
+                throw ApiError.BadVerifiedCaptchaToken()
+            }
 
             const errors = validationResult(req)
 

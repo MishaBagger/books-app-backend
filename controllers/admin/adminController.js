@@ -1,5 +1,6 @@
 const AdminService = require('../../services/admin/adminService.js')
 const ApiError = require('../../exceptions/ApiError.js')
+const redisClient = require('../../caching/redisClient.js')
 
 class AdminController {
     async getMetrics(req, res, next) {
@@ -18,11 +19,21 @@ class AdminController {
 
     async getBooks(req, res, next) {
         try {
+            const cacheKey = 'books'
+
+            const cachedData = await redisClient.get(cacheKey)
+
+            if (cachedData) {
+                return res.status(200).json(JSON.parse(cachedData));
+            }
+
             const books = await AdminService.getBooks()
 
             if (!books) {
                 throw ApiError.NotFound('Ошибка при получении книг!')
             }
+
+            await redisClient.setEx(cacheKey, 3600, JSON.stringify(books))
 
             return res.status(200).json(books)
         } catch (e) {
