@@ -1,6 +1,6 @@
 const BookService = require('../../services/book/bookService.js')
 const ApiError = require('../../exceptions/ApiError.js')
-const redisClient = require('./redisClient')
+const redisClient = require('../../caching/redisClient.js')
 
 class BookController {
     async getBooks(req, res, next) {

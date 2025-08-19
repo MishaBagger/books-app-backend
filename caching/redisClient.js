@@ -4,10 +4,10 @@ const fs = require('fs')
 const redisClient = createClient({
   url: process.env.REDIS_URL,
   password: process.env.REDIS_PASSWORD,
-  socket: {
-    tls: true,
-    ca: [fs.readFileSync('/etc/redis/redis.crt')]
-  }
+  // socket: {
+  //   tls: true,
+  //   ca: [fs.readFileSync('/etc/redis/redis.crt')]
+  // }
 });
 
 redisClient.on('error', (err) => {

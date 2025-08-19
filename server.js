@@ -145,7 +145,7 @@ app.use('/api', apiLimiter, router)
 app.use(errorMiddleware)
 
 // Статика из public
-app.use(express.static('public'))
+app.use('/_express', express.static('public'))
 
 // Обработка HTML
 app.get('*', (req, res) => {
