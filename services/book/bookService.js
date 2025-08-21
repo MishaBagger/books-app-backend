@@ -7,6 +7,8 @@ class BookService {
             const { count, rows: books } = await BookModel.findAndCountAll({
                 offset,
                 limit,
+                order: [['date', 'DESC']],
+                subQuery: false
             })
 
             return {

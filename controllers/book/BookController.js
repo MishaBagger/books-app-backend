@@ -1,5 +1,4 @@
 const BookService = require('../../services/book/bookService.js')
-const ApiError = require('../../exceptions/ApiError.js')
 const redisClient = require('../../caching/redisClient.js')
 
 class BookController {
@@ -17,10 +16,6 @@ class BookController {
             }
 
             const result = await BookService.getBooks(page, limit)
-
-            if (!result.books.length) {
-                throw ApiError.NotFound('Книги не найдены!')
-            }
 
             await redisClient.setEx(cacheKey, 3600, JSON.stringify(result))
 
